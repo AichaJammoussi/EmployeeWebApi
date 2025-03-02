@@ -1,5 +1,6 @@
 ﻿using EmployeeWebApi.Models;
 using EmployeeWebApi.Models.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +17,8 @@ namespace EmployeeWebApi.Controllers
         {
             this.employeeRepository = employeeRepository;
         }
+        [Authorize]
+
         [HttpGet]
         public async Task<ActionResult> GetEmployees()
         {
@@ -144,6 +147,17 @@ namespace EmployeeWebApi.Controllers
         
 
         }
+
+        [Authorize]
+        [HttpGet("protected")]
+        public IActionResult GetProtectedData()
+        {
+            return Ok(new { message = "Accès autorisé !",});
+        }
+
+
+
+
     }
 
 
